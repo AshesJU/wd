@@ -42,6 +42,7 @@ void visit(BiTNode *p){
 		printf("%d ",p->data);
 }
 
+
 void InOrder2(BiTree T){
 		LinkStack S;
 		InitStack(&S);

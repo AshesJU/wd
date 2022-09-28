@@ -34,26 +34,6 @@ bool pop(SqStack *S,BiTree *p){
 		return true;
 }
 
-//答案方法
-int PreNode(BiTree T,int k,int *i){
-		int j;
-		if(T==NULL){
-				return -1;
-		}else if(*i==k){
-				return T->data;
-		}else{
-				(*i)++;
-				j=PreNode(T->lchild,k,i);
-				if(j!=-1){
-						return j;
-				}else{
-						j=PreNode(T->rchild,k,i);
-						return j;
-				}
-		}
-		
-}
-
 //递归方法
 void PreOrder(BiTree T,int *i,int k){
 		if(*i==k){
@@ -131,9 +111,8 @@ int main(){
 		n7->rchild=NULL;
 		n8->lchild=NULL;
 		n8->rchild=NULL;
-		int t=1;
 		for(int i=1;i<=8;i++){
-				printf("%d\n",PreNode(T,i,&t));
+				PreOrder_k(T,i);
 		}
 		return 0;
 }

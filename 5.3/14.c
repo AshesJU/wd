@@ -65,6 +65,40 @@ int TreeWidth(BiTree T){
 		}
 		return w;
 }
+//设Queue为非循环队列
+int BTWidth(BiTree T){
+		SqQueue Q;
+		BiTree p;
+		int Level[MaxSize],i=0,k,n,max;
+		InitQueue(&Q);
+		EnQueue(&Q,T);
+		Level[Q.rear]=1;
+		while(!isEmpty(Q)){
+				DeQueue(&Q,&p);
+				k=Level[Q.front];
+				if(p->lchild){
+						EnQueue(&Q,p->lchild);
+						Level[Q.rear]=k+1;
+				}
+				if(p->rchild){
+						EnQueue(&Q,p->rchild);
+						Level[Q.rear]=k+1;
+				}
+		}
+		max=0;
+		k=1;
+		i=0;
+		while(i<=Q.rear){
+				n=0;
+				while(i<=Q.rear&&Level[i]==k){
+						n++;
+						i++;
+				}
+				k=Level[i];
+				if(n>max) max=n;
+		}
+		return max;
+}
 
 int main(){
 		BiTree T=(BiTNode*)malloc(sizeof(BiTNode));
@@ -80,8 +114,8 @@ int main(){
 		n2->lchild=n4;
 		n2->rchild=n5;
 		n3->lchild=n6;
-		n3->rchild=n7;
-		n4->lchild=n8;
+		n3->rchild=NULL;
+		n4->lchild=NULL;
 		n4->rchild=NULL;
 		n5->lchild=NULL;
 		n5->rchild=NULL;
@@ -91,7 +125,7 @@ int main(){
 		n7->rchild=NULL;
 		n8->lchild=NULL;
 		n8->rchild=NULL;
-		printf("TreeWidth:%d\n",TreeWidth(T));
+		printf("TreeWidth:%d\n",BTWidth(T));
 		return 0;
 }
 	
